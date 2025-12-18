@@ -28,6 +28,16 @@ public:
         tail = newNode;
         length = 1;
     }
+    ~LinkedList() // destructor(deletes all nodes + the length & node pointers by default)
+    {
+        Node *temp = head;
+        while (head)
+        {
+            head = head->next;
+            delete temp;
+            temp = head;
+        }
+    }
 
     void printList()
     {
