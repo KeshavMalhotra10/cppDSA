@@ -56,6 +56,9 @@ public:
     }
     int dequeue()
     {
+        // ensure to validate for nonempty list first, before making the temp node.
+        // You cannot make Node* temp = first, if there is no node for first to point to
+
         if (length == 0)
             return INT_MIN;
         Node *temp = first;
