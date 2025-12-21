@@ -38,6 +38,23 @@ public:
             temp = temp->next;
         }
     }
+
+    void enqueue(int value)
+    {
+        Node *newNode = new Node(value);
+        if (length == 0)
+        {
+            first = newNode;
+            last = newNode;
+        }
+        else
+        {
+            last->next = newNode;
+            last = newNode;
+        }
+        length++;
+    }
+
     void getFirst()
     {
         cout << "First: " << first->value << endl;
@@ -55,9 +72,8 @@ public:
 int main()
 {
     Queue *myQueue = new Queue(7);
-    myQueue->getFirst();
-    myQueue->getLast();
-    myQueue->getLength();
+
+    myQueue->enqueue(2);
 
     myQueue->printQueue();
 }
