@@ -48,7 +48,7 @@ public:
     int pop()
     {
         if (height == 0)
-            return INT_MIN;
+            return INT_MIN; // when we get this absurd value, we know the stack is empty
         Node *temp = top;
         int poppedValue = temp->value;
         top = top->next;
@@ -70,7 +70,10 @@ public:
 int main()
 {
     Stack *myStack = new Stack(4);
-
+    myStack->push(14);
+    myStack->push(10);
+    cout << "Popped value: " << myStack->pop() << endl;
+    cout << "Popped value: " << myStack->pop() << endl;
     cout << "Popped value: " << myStack->pop() << endl;
     cout << "Popped value: " << myStack->pop() << endl;
 }
