@@ -54,6 +54,25 @@ public:
         }
         length++;
     }
+    int dequeue()
+    {
+        if (length == 0)
+            return INT_MIN;
+        Node *temp = first;
+        int dequeueValue = temp->value;
+        if (length == 1)
+        {
+            first = nullptr;
+            last = nullptr;
+        }
+        else
+        {
+            first = first->next;
+        }
+        delete temp;
+        length--;
+        return dequeueValue;
+    }
 
     void getFirst()
     {
@@ -74,6 +93,8 @@ int main()
     Queue *myQueue = new Queue(7);
 
     myQueue->enqueue(2);
-
+    myQueue->dequeue();
+    myQueue->printQueue();
+    myQueue->dequeue();
     myQueue->printQueue();
 }
