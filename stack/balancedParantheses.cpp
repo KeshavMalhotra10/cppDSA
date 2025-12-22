@@ -11,20 +11,21 @@ bool isBalancedPar(const string &par)
     stack<char> st;
     for (int i = 0; i < int(par.length()); i++)
     {
-        if (par[i] == '(' && i != int(par.length()) - 1)
+        if (par[i] == '(')
         {
-            st.push(par[i]);
+            st.push('(');
         }
-        else if (par[i] == ')' && !st.empty())
+        else if (par[i] == ')')
         {
+            if (st.empty())
+            {
+                return false;
+            }
             st.pop();
         }
-        else
-        {
-            return false;
-        }
     }
-    return true;
+    if (st.empty())
+        return true;
 }
 int main()
 {
