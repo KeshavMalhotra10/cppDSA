@@ -71,6 +71,19 @@ public:
             temp->next = newNode;
         }
     }
+
+    int get(string key)
+    {
+        int index = hash(key);
+        Node *temp = dataMap[index];
+        while (temp != nullptr)
+        {
+            if (temp->key == key)
+                return temp->value;
+            temp = temp->next;
+        }
+        return 0;
+    }
 };
 int main()
 {
@@ -80,8 +93,6 @@ int main()
     myHashTable->set("tile", 50);
     myHashTable->set("lumber", 80);
 
-    myHashTable->set("bolts", 200);
-    myHashTable->set("screws", 140);
-
-    myHashTable->printTable();
+    cout << "Lumber: " << myHashTable->get("lumber") << endl;
+    cout << "Bolts: " << myHashTable->get("bolts") << endl;
 }
