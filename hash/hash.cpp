@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 class Node
 {
@@ -84,15 +85,36 @@ public:
         }
         return 0;
     }
+
+    vector<string> keys()
+    {
+        vector<string> allKeys;
+        for (int i = 0; i < SIZE; i++)
+        {
+            Node *temp = dataMap[i];
+            while (temp != nullptr)
+            {
+                allKeys.push_back(temp->key);
+                temp = temp->next;
+            }
+        }
+        return allKeys;
+    }
 };
 int main()
 {
     HashTable *myHashTable = new HashTable();
 
+    myHashTable->set("paint", 20);
+    myHashTable->set("bolts", 40);
     myHashTable->set("nails", 100);
     myHashTable->set("tile", 50);
     myHashTable->set("lumber", 80);
 
-    cout << "Lumber: " << myHashTable->get("lumber") << endl;
-    cout << "Bolts: " << myHashTable->get("bolts") << endl;
+    vector<string> myKeys = myHashTable->keys();
+
+    for (auto key : myKeys) // auto is so cool
+    {
+        cout << key << " ";
+    }
 }
