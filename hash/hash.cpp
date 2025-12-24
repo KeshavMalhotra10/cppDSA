@@ -38,6 +38,20 @@ public:
             }
         }
     }
+    int hash(string key)
+    {
+        int hash = 0;
+        for (int i = 0; i < key.length(); i++)
+        {
+            int asciiValue = int(key[i]);
+            hash = (hash + asciiValue * 23) % SIZE;
+            /*
+            multiply by 23 since 23 is a prime number so makes results more random
+            when using modulo SIZE: when dividing by SIZE=7, we will get a remainder from 0-6
+            */
+        }
+        return hash;
+    }
 };
 int main()
 {
