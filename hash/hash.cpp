@@ -41,20 +41,47 @@ public:
     int hash(string key)
     {
         int hash = 0;
-        for (int i = 0; i < key.length(); i++)
+        for (int i = 0; i < int(key.length()); i++)
         {
             int asciiValue = int(key[i]);
             hash = (hash + asciiValue * 23) % SIZE;
             /*
-            multiply by 23 since 23 is a prime number so makes results more random
-            when using modulo SIZE: when dividing by SIZE=7, we will get a remainder from 0-6
+            Note: 23 is a prime number. Remember multiplying by prime numbers increase randomness of hash.
+            modulo SIZE: when dividing by SIZE = 7, we will get a remainder from 0-6
             */
         }
         return hash;
+    }
+
+    void set(string key, int value)
+    {
+        int index = hash(key);
+        Node *newNode = new Node(key, value);
+        if (dataMap[index] == nullptr)
+        {
+            dataMap[index] = newNode;
+        }
+        else
+        {
+            Node *temp = dataMap[index];
+            while (temp->next != nullptr)
+            {
+                temp = temp->next;
+            }
+            temp->next = newNode;
+        }
     }
 };
 int main()
 {
     HashTable *myHashTable = new HashTable();
+
+    myHashTable->set("nails", 100);
+    myHashTable->set("tile", 50);
+    myHashTable->set("lumber", 80);
+
+    myHashTable->set("bolts", 200);
+    myHashTable->set("screws", 140);
+
     myHashTable->printTable();
 }
