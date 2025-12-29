@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <climits>
 using namespace std;
 class Heap
 {
@@ -28,7 +29,46 @@ private:
         heap[index1] = heap[index2];
         heap[index2] = temp;
     }
+
+public:
+    // Prints the elements of the heap in order, separated by commas.
+    void printHeap()
+    {
+        cout << endl
+             << '[';
+        for (size_t i = 0; i < heap.size(); i++)
+        {
+            cout << heap[i];
+            if (i < heap.size() - 1)
+            {
+                cout << ", ";
+            }
+        }
+        cout << "]" << endl;
+    }
+
+    void insert(int value)
+    {
+        heap.push_back(value);
+        int current = heap.size() - 1;
+
+        while (current > 0 && heap[current] > heap[parent(current)])
+        {
+            swap(current, parent(current));
+            current = parent(current);
+        }
+    }
 };
 int main()
 {
+    Heap *myHeap = new Heap();
+    myHeap->insert(99);
+    myHeap->insert(72);
+    myHeap->insert(61);
+    myHeap->insert(58);
+
+    myHeap->printHeap();
+
+    myHeap->insert(100);
+    myHeap->printHeap();
 }
