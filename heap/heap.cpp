@@ -58,17 +58,73 @@ public:
             current = parent(current);
         }
     }
+    int remove()
+    {
+        if (heap.empty())
+        {
+            return INT_MIN;
+        }
+        int maxValue = heap.front();
+        if (heap.size() == 1)
+        {
+            heap.pop_back();
+        }
+        else
+        {
+            heap[0] = heap.back();
+            heap.pop_back();
+            sinkDown(0);
+        }
+
+        return maxValue;
+    }
+
+    void sinkDown(int index)
+    {
+        int maxIndex = index;
+        while (true)
+        {
+            int leftIndex = leftChild(index);
+            int rightIndex = rightChild(index);
+
+            if (leftIndex < int(heap.size()) && heap[leftIndex] > heap[maxIndex])
+            {
+                maxIndex = leftIndex;
+            }
+            if (rightIndex < int(heap.size()) && heap[rightIndex] > heap[maxIndex])
+            {
+                maxIndex = rightIndex;
+            }
+            if (maxIndex != index)
+            {
+                swap(index, maxIndex);
+                index = maxIndex;
+            }
+            else
+            {
+                return;
+            }
+        }
+    }
 };
 int main()
 {
     Heap *myHeap = new Heap();
-    myHeap->insert(99);
-    myHeap->insert(72);
-    myHeap->insert(61);
-    myHeap->insert(58);
+    myHeap->insert(95);
+    myHeap->insert(75);
+    myHeap->insert(80);
+    myHeap->insert(55);
+    myHeap->insert(60);
+    myHeap->insert(50);
+    myHeap->insert(65);
 
     myHeap->printHeap();
 
-    myHeap->insert(100);
+    myHeap->remove();
+
+    myHeap->printHeap();
+
+    myHeap->remove();
+
     myHeap->printHeap();
 }
